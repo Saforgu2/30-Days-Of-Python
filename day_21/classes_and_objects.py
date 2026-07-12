@@ -1,6 +1,5 @@
 # DAY 21
 
-
 # LEVEL 1
 
 class Statistics:

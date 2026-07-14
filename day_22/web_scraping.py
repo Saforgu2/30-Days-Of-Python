@@ -5,7 +5,7 @@ import requests
 import json
 
 # LEVEL 1
-
+'''
 url = 'http://www.bu.edu/president/boston-university-facts-stats/'
 response = requests.get(url)
 
@@ -45,3 +45,25 @@ if(response.status_code == 200):
         
     with open('bu_json_file.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+'''
+# LEVEL 3
+
+url = 'https://en.wikipedia.org/wiki/List_of_presidents_of_the_United_States'
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+}
+response = requests.get(url, headers=headers)
+
+print(response.status_code)
+
+if(response.status_code == 200):
+    content = response.content
+    soup = BeautifulSoup(content, 'html.parser')
+    
+    print(soup.title.get_text())
+
+    h2 = soup.find_all('h2', {'id': 'Presidents'})
+    print(h2)
+
+    table = soup.find('table', class_='wikitable')
+    print(table)
